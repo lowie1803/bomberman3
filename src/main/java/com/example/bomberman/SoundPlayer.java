@@ -31,7 +31,6 @@ public class SoundPlayer {
             clip.open(dais);
         } catch (Exception ignored) {
         }
-
     }
 
     public void play() {

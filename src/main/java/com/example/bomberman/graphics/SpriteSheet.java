@@ -9,15 +9,12 @@ import java.io.IOException;
 import java.net.URL;
 
 public class SpriteSheet {
-
     private final String path;
     public final int WIDTH;
     public final int HEIGHT;
     public int[] pixels;
 
     public static SpriteSheet tiles = new SpriteSheet("/textures/classic.png", 256, 256);
-
-
     public SpriteSheet(String path, int sizeW, int sizeH) {
         this.path = path;
         WIDTH = sizeW;

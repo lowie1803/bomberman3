@@ -16,7 +16,7 @@ import com.example.bomberman.entities.cell.item.BombItem;
 import com.example.bomberman.entities.cell.item.FlareItem;
 import com.example.bomberman.entities.cell.item.SpeedItem;
 import com.example.bomberman.entities.character.Bomber;
-import com.example.bomberman.entities.character.enemy.Balloon;
+import com.example.bomberman.entities.character.enemy.Ballom;
 import com.example.bomberman.entities.character.enemy.Oneal;
 import com.example.bomberman.graphics.Screen;
 import com.example.bomberman.graphics.Sprite;
@@ -92,7 +92,7 @@ public class FileLevelLoader extends LevelLoader {
                 board.addEntity(pos, new LayeredEntity(x, y, new Grass(x, y, Sprite.grass), new Portal(x, y, Sprite.portal, board), new Brick(x, y, Sprite.brick)));
                 break;
             case '1':
-                board.addCharacter(new Balloon(Coordinates.cellToPixel(x), Coordinates.cellToPixel(y) + Game.CELLS_SIZE, board));
+                board.addCharacter(new Ballom(Coordinates.cellToPixel(x), Coordinates.cellToPixel(y) + Game.CELLS_SIZE, board));
                 board.addEntity(pos, new Grass(x, y, Sprite.grass));
                 break;
             case '2':

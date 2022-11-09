@@ -1,9 +1,8 @@
-package com.example.bomberman.graphics;
 /**
  * Class Screen
- *
  * @author low_
  */
+package com.example.bomberman.graphics;
 
 import com.example.bomberman.Board;
 import com.example.bomberman.Game;
@@ -13,9 +12,6 @@ import com.example.bomberman.entities.character.Bomber;
 import java.awt.*;
 import java.util.Arrays;
 
-/**
- * Xử lý render cho tất cả Entity và một số màn hình phụ ra Game Panel
- */
 public class Screen {
     public static final String FONT_LINK = "res/gamefont.ttf";
     public static final String FONT_NAME = "Falstin";
@@ -75,8 +71,8 @@ public class Screen {
 
     /**
      * render Entity With Sprite Below.
-     * @param xp tọa độ x
-     * @param yp tọa độ y
+     * @param xp x-coordinate
+     * @param yp y-coordinate
      * @param entity Entity
      * @param below Entity below
      */
