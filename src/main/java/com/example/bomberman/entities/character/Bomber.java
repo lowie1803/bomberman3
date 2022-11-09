@@ -22,6 +22,10 @@ import java.util.List;
 public class Bomber extends Character {
     private final List<Bomb> bombs;
     private final Keyboard input;
+    private static final int SMOOTHEN_PIXEL = 2;
+    private int smoothenX;
+    private int smoothenY;
+
 
     private int timeBetweenPutBombs = 0;
 
@@ -37,6 +41,8 @@ public class Bomber extends Character {
         bombs = board.getBombs();
         input = board.getInput();
         sprite = Sprite.player_right;
+        smoothenX = 0;
+        smoothenY = 0;
     }
 
     /**
@@ -179,24 +185,68 @@ public class Bomber extends Character {
     /**
      * Check whether it's possible to move to (x, y)
      *
-     * @param x x-coordinate
-     * @param y y-coordinate
+     * @param deltaX x-coordinate
+     * @param deltaY y-coordinate
      * @return true if movable
      */
     @Override
-    public boolean movable(double x, double y) {
-        for (int c = 0; c < 4; ++c) {
-            double x1 = ((coordinateX + x) + c % 2 * 11) / Game.CELLS_SIZE;
-            double y1 = ((coordinateY + y) + c / 2 * 12 - 13) / Game.CELLS_SIZE;
-            Entity a = board.getEntity(x1, y1, this);
-
+    public boolean movable(double deltaX, double deltaY) {
+        int collidePixelsCount = 0;
+        int smoothenX = 0, smoothenY = 0;
+        for (int i = 0; i < 13; i++) {
+            double nextX = (coordinateX + deltaX + i) / Game.CELLS_SIZE;
+            double upY = (coordinateY + deltaY - 12) / Game.CELLS_SIZE;
+            double downY = (coordinateY + deltaY) / Game.CELLS_SIZE;
+            Entity a = board.getEntity(nextX, upY, this);
             if (a != null) {
-                if (!a.collide(this)) {
-                    return false;
+                if (!a.collide(this) && !(a instanceof Bomb)) {
+                    System.out.println(a.getClass());
+                    collidePixelsCount ++;
+                    if (i < 7) smoothenX++;
+                    else smoothenX--;
+                }
+            }
+
+            Entity b = board.getEntity(nextX, downY, this);
+            if (b != null) {
+                if (!b.collide(this) && !(b instanceof Bomb)) {
+                    System.out.println(b.getClass());
+                    collidePixelsCount ++;
+                    if (i < 7) smoothenX++;
+                    else smoothenX--;
                 }
             }
         }
 
+        for (int i = -12; i < 1; i++) {
+            double leftX = (coordinateX + deltaX) / Game.CELLS_SIZE;
+            double rightX = (coordinateX + deltaX + 12) / Game.CELLS_SIZE;
+            double nextY = (coordinateY + deltaY + i) / Game.CELLS_SIZE;
+            Entity a = board.getEntity(leftX, nextY, this);
+            if (a != null) {
+                if (!a.collide(this) && !(a instanceof Bomb)) {
+                    collidePixelsCount ++;
+                    if (i < -6) smoothenY++;
+                    else smoothenY--;
+                }
+            }
+
+            Entity b = board.getEntity(rightX, nextY, this);
+            if (b != null) {
+                if (!b.collide(this) && !(b instanceof Bomb)) {
+                    System.out.println(b.getClass());
+                    collidePixelsCount ++;
+                    if (i < -6) smoothenY++;
+                    else smoothenY--;
+                }
+            }
+        }
+
+        if (collidePixelsCount > 5) {
+            return false;
+        }
+        this.smoothenY = smoothenY;
+        this.smoothenX = smoothenX;
         return true;
     }
 
@@ -221,10 +271,18 @@ public class Bomber extends Character {
             direction = 2;
         }
         if (movable(0, v)) {
+            coordinateY += smoothenY;
+            coordinateX += smoothenX;
             coordinateY += v;
+            smoothenX = 0;
+            smoothenY = 0;
         }
         if (movable(u, 0)) {
+            coordinateY += smoothenY;
+            coordinateX += smoothenX;
             coordinateX += u;
+            smoothenX = 0;
+            smoothenY = 0;
         }
     }
 

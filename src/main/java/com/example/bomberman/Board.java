@@ -167,7 +167,7 @@ public class Board implements IRender {
 
     public void gameResume() {
         game.resetScreenDelay();
-        backgroundSound.play();
+        backgroundSound.loop();
         screenToShow = -1;
         game.run();
     }
@@ -287,15 +287,6 @@ public class Board implements IRender {
 
         res = getEntityAt((int) x, (int) y);
         return res;
-    }
-
-    public boolean isWallBrick(int x, int y) {
-        Entity e = entities[x + y * levelLoader.getWidth()];
-        if (e instanceof LayeredEntity) {
-            return ((LayeredEntity) e).getTopEntity() instanceof Brick;
-        }
-        return (e instanceof Brick || e instanceof Wall);
-
     }
 
     public Character getCharacterAt(double x, double y) {

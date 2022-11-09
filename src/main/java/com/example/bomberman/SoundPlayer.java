@@ -38,7 +38,14 @@ public class SoundPlayer {
             stop();
             clip.setFramePosition(0);
             clip.start();
+        }
+    }
 
+    public void loop() {
+        if (clip != null) {
+            stop();
+            clip.setFramePosition(0);
+            clip.loop(100000);
         }
     }
 

@@ -9,6 +9,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class InfoPanel extends JPanel {
+    public static final String FONT_NAME = "Falstin";
+    public static final Font INFO_FONT = new Font(FONT_NAME, Font.PLAIN, 16);
 
     private final JLabel timeLabel;
     private final JLabel pointsLabel;
@@ -25,18 +27,22 @@ public class InfoPanel extends JPanel {
 
         timeLabel = new JLabel("Time: " + game.getBoard().getTime());
         timeLabel.setForeground(Color.WHITE);
+        timeLabel.setFont(INFO_FONT);
         timeLabel.setHorizontalAlignment(JLabel.CENTER);
 
         pointsLabel = new JLabel("Points: " + game.getBoard().getPoints());
         pointsLabel.setForeground(Color.YELLOW);
+        pointsLabel.setFont(INFO_FONT);
         pointsLabel.setHorizontalAlignment(JLabel.CENTER);
 
         livesLabel = new JLabel("Lives: " + game.getBoard().getLives());
         livesLabel.setForeground(Color.RED);
+        livesLabel.setFont(INFO_FONT);
         livesLabel.setHorizontalAlignment(JLabel.CENTER);
 
         HighScoreLabel = new JLabel("High Score: " + game.getBoard().getHighScore());
         HighScoreLabel.setForeground(Color.ORANGE);
+        HighScoreLabel.setFont(INFO_FONT);
         HighScoreLabel.setHorizontalAlignment(JLabel.CENTER);
 
         add(timeLabel);
@@ -83,5 +89,4 @@ public class InfoPanel extends JPanel {
     public void setHighScore(int highScore) {
         HighScoreLabel.setText("High Score: " + highScore);
     }
-
 }
