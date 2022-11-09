@@ -30,9 +30,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-/**
- * Quản lý thao tác điều khiển, load level, render các màn hình của game
- */
 public class Board implements IRender {
 
     public Entity[] entities;
@@ -185,7 +182,7 @@ public class Board implements IRender {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if (level > 5) {
+        if (level > 3) {
             victory = true;
             endGame();
             return;

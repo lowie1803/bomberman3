@@ -22,7 +22,6 @@ import java.util.List;
 public class Bomber extends Character {
     private final List<Bomb> bombs;
     private final Keyboard input;
-    private static final int SMOOTHEN_PIXEL = 2;
     private int smoothenX;
     private int smoothenY;
 
@@ -104,7 +103,7 @@ public class Bomber extends Character {
     }
 
     /**
-     * dat bom vao vi tri x, y.
+     * Put bomb in (x, y)
      *
      * @param x int x
      * @param y int y
@@ -200,7 +199,6 @@ public class Bomber extends Character {
             Entity a = board.getEntity(nextX, upY, this);
             if (a != null) {
                 if (!a.collide(this) && !(a instanceof Bomb)) {
-                    System.out.println(a.getClass());
                     collidePixelsCount ++;
                     if (i < 7) smoothenX++;
                     else smoothenX--;
@@ -210,7 +208,6 @@ public class Bomber extends Character {
             Entity b = board.getEntity(nextX, downY, this);
             if (b != null) {
                 if (!b.collide(this) && !(b instanceof Bomb)) {
-                    System.out.println(b.getClass());
                     collidePixelsCount ++;
                     if (i < 7) smoothenX++;
                     else smoothenX--;
@@ -234,7 +231,6 @@ public class Bomber extends Character {
             Entity b = board.getEntity(rightX, nextY, this);
             if (b != null) {
                 if (!b.collide(this) && !(b instanceof Bomb)) {
-                    System.out.println(b.getClass());
                     collidePixelsCount ++;
                     if (i < -6) smoothenY++;
                     else smoothenY--;

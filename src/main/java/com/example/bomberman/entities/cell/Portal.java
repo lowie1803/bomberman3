@@ -32,7 +32,6 @@ public class Portal extends Cell {
      */
     @Override
     public boolean collide(Entity e) {
-        // xử lý khi Bomber đi vào
         if (e instanceof Bomber) {
             if (!board.detectNoEnemies())
                 return false;

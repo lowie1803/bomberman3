@@ -30,14 +30,6 @@ public class Ballom extends Enemy {
     protected void chooseSprite() {
         switch (direction) {
             case 0:
-                sprite = Sprite.movingSprite(
-                        Sprite.ballom_right1,
-                        Sprite.ballom_right2,
-                        Sprite.ballom_right3,
-                        animate,
-                        60
-                );
-                break;
             case 1:
                 sprite = Sprite.movingSprite(
                         Sprite.ballom_right1,
@@ -48,14 +40,6 @@ public class Ballom extends Enemy {
                 );
                 break;
             case 2:
-                sprite = Sprite.movingSprite(
-                        Sprite.ballom_left1,
-                        Sprite.ballom_left2,
-                        Sprite.ballom_left3,
-                        animate,
-                        60
-                );
-                break;
             case 3:
                 sprite = Sprite.movingSprite(
                         Sprite.ballom_left1,
